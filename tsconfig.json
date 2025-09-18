@@ -15,6 +15,7 @@
     "moduleResolution": "bundler",
     "skipLibCheck": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "sourceMap": true
   },
   "include": ["src/**/*.*ts*", "src/**/*.json", "src/**/*module.css"],

@@ -2,7 +2,6 @@ import { findElementAncestor } from "@mantine/core";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 import cx from "clsx";
 import { isEqual } from "es-toolkit/compat";
-import pluralize from "pluralize";
 import {
   Dispatch,
   SetStateAction,
@@ -20,7 +19,7 @@ import {
 import classes from "./JSONode.module.css";
 import valueClasses from "./RenderValue.module.css";
 
-import { CopyButtonAdvanced, CopyButtonItem } from "./accessories/CopyButtonAdvanced";
+import { CopyButtonAdvanced, CopyButtonItem } from "./accessories/CopyButton";
 import { JSOChunk, JSOChunkData } from "./JSOChunk";
 import { JSONodeLoading } from "./JSONodeLoading";
 import { ParsedProps, QuoteKeyOptions } from "./JSOViewer";
@@ -296,7 +295,7 @@ export const JSONode = memo(function JSONodeInternal({
 
         {node.type === "collection" && (isExpanded || node.collapsedContents !== CHILD_COUNT) && (
           <span className={classes.size}>
-            {numberFormatter.format(nodeSizing.size)} {pluralize("items", nodeSizing.size)}
+            {numberFormatter.format(nodeSizing.size)} {nodeSizing.size === 1 ? "item" : "items"}
           </span>
         )}
 

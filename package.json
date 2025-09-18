@@ -1,11 +1,12 @@
 {
-  "name": "jsoviewer",
+  "name": "jso-viewer",
   "version": "0.0.1",
   "description": "React library for viewing JSON data with advanced features.",
   "author": "Milo Hansen <github@milo.codes>",
   "license": "ISC",
   "type": "module",
-  "module": "./dist/JSOViewer.js",
+  "module": "./dist/JSOViewer.mjs",
+  "main": "./dist/JSOViewer.cjs",
   "types": "./dist/JSOViewer.d.ts",
   "keywords": [
     "components",
@@ -19,22 +20,29 @@
   "exports": {
     ".": {
       "types": "./dist/JSOViewer.d.ts",
-      "import": "./dist/JSOViewer.js"
+      "import": "./dist/JSOViewer.mjs",
+      "require": "./dist/JSOViewer.cjs"
     },
     "./styles.css": "./styles.css",
-    "./styles.layer.css": "./styles.layer.css",
-    "./styles/*": "./styles/*",
     "./Tooltip": {
       "types": "./dist/accessories/Tooltip.d.ts",
-      "import": "./dist/accessories/Tooltip.js"
+      "import": "./dist/Tooltip.mjs",
+      "require": "./dist/Tooltip.cjs"
     },
     "./MouseTooltip": {
       "types": "./dist/accessories/MouseTooltip.d.ts",
-      "import": "./dist/accessories/MouseTooltip.js"
+      "import": "./dist/MouseTooltip.mjs",
+      "require": "./dist/MouseTooltip.cjs"
+    },
+    "./CopyButton": {
+      "types": "./dist/accessories/CopyButton.d.ts",
+      "import": "./dist/CopyButton.mjs",
+      "require": "./dist/CopyButton.cjs"
     },
     "./TransitionPortal": {
       "types": "./dist/accessories/TransitionPortal.d.ts",
-      "import": "./dist/accessories/TransitionPortal.js"
+      "import": "./dist/TransitionPortal.mjs",
+      "require": "./dist/TransitionPortal.cjs"
     }
   },
   "files": [
@@ -48,11 +56,8 @@
     "type": "git"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "vite build && tsc",
     "watch": "vite build --watch",
-    "test": "jest",
     "tsc": "tsc"
   },
   "eslintConfig": {
@@ -67,9 +72,6 @@
     "es-toolkit": "^1.x",
     "react": "^18.x || ^19.x",
     "react-dom": "^18.x || ^19.x"
-  },
-  "dependencies": {
-    "pluralize": "^8.0.0"
   },
   "devDependencies": {
     "@mantine/core": "^8.3.1",
@@ -87,6 +89,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-unused-imports": "^4.1.4",
     "postcss": "^8.5.4",
+    "postcss-calc": "^10.1.1",
     "postcss-nesting": "^13.0.1",
     "postcss-preset-mantine": "^1.18.0",
     "postcss-simple-vars": "^7.0.1",

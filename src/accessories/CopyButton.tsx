@@ -4,8 +4,7 @@ import { IconCheck, IconClipboard } from "@tabler/icons-react";
 import cx from "clsx";
 import { PropsWithChildren, createContext, useCallback, useContext, useMemo, useState } from "react";
 
-import itemClasses from "./CopyButtonAdvanced.module.css";
-import classes from "./CustomCopyButton.module.css";
+import classes from "./CopyButton.module.css";
 
 import { CustomTooltip, CustomTooltipProps } from "./Tooltip";
 
@@ -125,7 +124,7 @@ export function CopyButtonItem({ children, value }: CopyButtonItemProps) {
         copy();
       }}
       fz="0.875rem"
-      className={itemClasses.item}
+      className={classes.item}
     >
       {children}
     </UnstyledButton>
