@@ -101,5 +101,6 @@
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-node-polyfills": "^0.24.0",
     "vite-tsconfig-paths": "^5.1.4"
-  }
+  },
+  "packageManager": "yarn@4.10.2"
 }
