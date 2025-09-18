@@ -1,6 +1,6 @@
 {
   "name": "jso-viewer",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha",
   "description": "React library for viewing JSON data with advanced features.",
   "author": "Milo Hansen <github@milo.codes>",
   "license": "ISC",

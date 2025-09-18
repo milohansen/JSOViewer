@@ -1,6 +1,6 @@
 {
   "name": "@m110/jso-viewer",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha",
   "license": "ISC",
   "exports": {
     ".": "./src/JSOViewer.tsx",
