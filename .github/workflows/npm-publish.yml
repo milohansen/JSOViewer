@@ -10,49 +10,10 @@ on:
     branches:
       - main
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Enable Corepack
-#         run: corepack enable
-#       - name: Use Node.js 20.x
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "22.x"
-#           cache: 'yarn'
-#       - name: Install dependencies
-#         run: yarn install --immutable
-#       - name: Run build
-#         run: yarn build
-
-#   publish-npm:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Enable Corepack
-#         run: corepack enable
-#       - name: Use Node.js 20.x
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "22.x"
-#           cache: 'yarn'
-#       - name: Install dependencies
-#         run: yarn install --immutable
-#       - name: Run build
-#         run: yarn build
-#       - run: yarn publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
 jobs:
-  publish:
+  publish-npm:
+    needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - name: Enable Corepack
@@ -61,10 +22,30 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-          cache: "yarn"
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
       - name: Run build
         run: yarn build
-      - name: Publish package
-        run: yarn dlx jsr publish
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  # publish-jsr:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     id-token: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Use Node.js 22.x
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "22.x"
+  #         cache: "yarn"
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Publish package
+  #       run: yarn dlx jsr publish
