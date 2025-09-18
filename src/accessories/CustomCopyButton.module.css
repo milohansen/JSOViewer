@@ -1,0 +1,12 @@
+.icon {
+  /* color: light-dark(var(--mantine-color-dark-2), var(--mantine-color-dark-6)); */
+  /* color: var(--mantine-color-dimmed);
+
+  &:hover {
+    color: var(--mantine-color-text);
+  } */
+
+  &[data-copied] {
+    color: var(--mantine-color-teal-filled);
+  }
+}

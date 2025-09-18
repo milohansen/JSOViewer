@@ -1,0 +1,55 @@
+.container {
+  --level-offset: 2ch;
+
+  position: relative;
+
+  display: grid;
+
+  overflow: auto;
+  padding-inline: 2ch;
+  padding-block: 0.5em;
+  margin: 0;
+  background: var(--darkened-background);
+  font-family: var(--mantine-font-family-monospace);
+
+  &:hover .options-button {
+    display: block !important;
+  }
+
+  & > * {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  --colored-bracket-0: var(--mantine-color-red-light-color);
+  --colored-bracket-1: var(--mantine-color-orange-light-color);
+  --colored-bracket-2: var(--mantine-color-lime-light-color);
+  --colored-bracket-3: var(--mantine-color-teal-light-color);
+  --colored-bracket-4: var(--mantine-color-blue-light-color);
+  --colored-bracket-5: var(--mantine-color-violet-light-color);
+  --colored-bracket-6: var(--mantine-color-pink-light-color);
+  --colored-bracket-7: var(--mantine-color-yellow-light-color);
+  --colored-bracket-8: var(--mantine-color-green-light-color);
+  --colored-bracket-9: var(--mantine-color-cyan-light-color);
+  --colored-bracket-10: var(--mantine-color-indigo-light-color);
+  --colored-bracket-11: var(--mantine-color-grape-light-color);
+
+  --after-content: " ";
+  &[data-show-commas="true"] {
+    --after-content: ", ";
+  }
+}
+
+.options-button {
+  position: sticky;
+  top: 0;
+  /* 'right' applies when 'sticky', 'margin-right' applies when scrolled to the end */
+  right: calc(0.5em - 2ch);
+  margin-right: calc(0.5em - 2ch);
+
+  justify-self: right;
+  z-index: 3;
+
+  &:not([data-open="true"]):not([data-expanded="true"]) {
+    display: none;
+  }
+}

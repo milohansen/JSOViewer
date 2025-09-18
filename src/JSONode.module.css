@@ -1,0 +1,303 @@
+.container[data-highlight-brackets="true"] {
+  .node[data-hovered="true"][data-expanded="true"] {
+    & > .subtree[data-show-level-line="true"] {
+      border-left: 1px solid var(--outline-color);
+    }
+
+    & > .label[data-show-level-line="true"] > .keyAndColon {
+      border-bottom: 1px inset var(--outline-color);
+      margin-bottom: -1px;
+      padding-right: calc(1ch - 2px);
+      margin-right: 2px;
+    }
+
+    .node:not([data-hovered="true"]) {
+      .collection-value::before,
+      .collection-closing-bracket::before {
+        outline: none;
+      }
+    }
+    .collection-value::before,
+    .collection-closing-bracket::before {
+      outline: thin solid var(--outline-color);
+    }
+  }
+}
+
+.container[data-colorize-brackets="true"] {
+  .node {
+    --bracket-color: var(--outline-color);
+
+    &[data-level-mod="0"] {
+      --outline-color: var(--colored-bracket-0);
+    }
+    &[data-level-mod="1"] {
+      --outline-color: var(--colored-bracket-1);
+    }
+    &[data-level-mod="2"] {
+      --outline-color: var(--colored-bracket-2);
+    }
+    &[data-level-mod="3"] {
+      --outline-color: var(--colored-bracket-3);
+    }
+    &[data-level-mod="4"] {
+      --outline-color: var(--colored-bracket-4);
+    }
+    &[data-level-mod="5"] {
+      --outline-color: var(--colored-bracket-5);
+    }
+    &[data-level-mod="6"] {
+      --outline-color: var(--colored-bracket-6);
+    }
+    &[data-level-mod="7"] {
+      --outline-color: var(--colored-bracket-7);
+    }
+    &[data-level-mod="8"] {
+      --outline-color: var(--colored-bracket-8);
+    }
+    &[data-level-mod="9"] {
+      --outline-color: var(--colored-bracket-9);
+    }
+    &[data-level-mod="10"] {
+      --outline-color: var(--colored-bracket-10);
+    }
+    &[data-level-mod="11"] {
+      --outline-color: var(--colored-bracket-11);
+    }
+  }
+}
+
+.node {
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  --outline-color: var(--mantine-color-dimmed);
+  --bracket-color: var(--mantine-color-text);
+
+  padding-left: calc(var(--level-offset) - 1px);
+  position: relative;
+
+  width: max-content;
+  border-radius: 2px;
+
+  /* TODO: Figure out how to do this more efficiently */
+  /* :has(> .label > .do-not-display) {
+    display: none;
+  } */
+
+  &[data-selected="true"] {
+    background-color: var(--mantine-color-blue-light);
+    --outline-color: var(--mantine-color-blue-light-color);
+  }
+
+  &[data-expanded="true"] {
+    .label::after {
+      --after-content: "";
+    }
+
+    & > .label > .collection-value {
+      --after-content: "";
+      .collection-collapsed-contents {
+        display: none;
+      }
+    }
+  }
+
+  .label {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    align-self: flex-start;
+
+    &:has(> .value[data-expandable="true"]) {
+      .caret {
+        display: inline-block;
+      }
+    }
+
+    &::after {
+      content: var(--after-content, " ");
+      white-space: pre;
+    }
+
+    .caret {
+      display: none;
+      width: 2ch;
+      height: 1lh;
+      margin-left: -2ch;
+      padding-inline: 0.25ch;
+      padding-block: calc(calc(1lh - 1.5ch) / 2);
+
+      color: var(--mantine-color-dimmed);
+
+      &[data-show="true"] {
+        display: inline-block;
+      }
+
+      &:hover {
+        color: var(--mantine-color-text);
+      }
+
+      transform: rotate(-90deg);
+      &[data-expanded="true"] {
+        transform: rotate(0deg);
+      }
+      transition-property: transform, color;
+      transition-duration: 0.1s;
+      cursor: pointer;
+    }
+
+    .key {
+      white-space: pre;
+
+      &[data-kind="string"] {
+        color: var(--mantine-color-green-text);
+      }
+      &[data-kind="number"] {
+        color: var(--mantine-color-blue-text);
+      }
+    }
+    .keyAndColon {
+      white-space: pre;
+      padding-right: 1ch;
+    }
+
+    .size {
+      color: var(--mantine-color-dimmed);
+      padding-left: 1ch;
+    }
+  }
+
+  .copy-button {
+    --line-height: calc(var(--mantine-font-size-md) * var(--mantine-line-height));
+    position: absolute;
+    top: 0;
+    right: 0;
+    right: calc(var(--line-height) * -1);
+    z-index: 1;
+  }
+
+  .collection-closing-bracket {
+    &::before {
+      content: attr(data-closing-bracket);
+      color: var(--bracket-color);
+    }
+    &::after {
+      content: var(--after-content);
+    }
+  }
+  .collection-value {
+    &::before {
+      content: attr(data-opening-bracket);
+      color: var(--bracket-color);
+    }
+    &::after {
+      content: var(--after-content);
+    }
+
+    .collection-collapsed-contents {
+      color: var(--mantine-color-text);
+      &::after {
+        content: attr(data-closing-bracket);
+        color: var(--bracket-color);
+      }
+    }
+  }
+
+  &:last-child > .comma {
+    --after-content: "";
+  }
+
+  & > .comma::after {
+    content: var(--after-content, " ");
+    color: var(--mantine-color-text);
+    white-space: pre;
+  }
+
+  &:not([data-value*="|chunk|"]):last-child {
+    --after-content: " ";
+
+    .subtree {
+      --after-content: ", ";
+    }
+  }
+
+  &[data-value*="|chunk|"] {
+    .node {
+      --after-content: ", ";
+    }
+
+    &:last-child .node:last-child {
+      --after-content: " ";
+    }
+  }
+
+  &[data-value*="|chunk|"] {
+    &:not(:last-child) .node:last-child {
+      --after-content: ", ";
+    }
+  }
+
+  .subtree {
+    margin: 0;
+    padding: 0;
+
+    display: none;
+
+    &[data-expanded="true"] {
+      display: block;
+    }
+
+    contain: layout style;
+    border-left: 1px solid transparent;
+
+    &[data-show-level-line="true"] {
+      border-left: 1px solid var(--mantine-color-disabled);
+    }
+
+    /* & > .node:last-child:not(:has(> .subtree)) {
+      --after-content: " ";
+    } */
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: calc(var(--level-offset) - 1px);
+  --count: attr(data-count type(<number>));
+  height: calc(var(--count) * 1lh);
+
+  /* HTML: <div class="loader"></div> */
+  .loader {
+    width: fit-content;
+    clip-path: inset(0 3ch 0 0);
+    animation: l4 1s steps(4) infinite;
+  }
+  .loader:before {
+    content: "Loading...";
+    color: var(--mantine-color-dimmed);
+  }
+  @keyframes l4 {
+    to {
+      clip-path: inset(0 -1ch 0 0);
+    }
+  }
+}
+
+.do-not-display {
+  display: none;
+}

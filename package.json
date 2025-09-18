@@ -1,0 +1,102 @@
+{
+  "name": "jsoviewer",
+  "version": "0.0.1",
+  "description": "React library for viewing JSON data with advanced features.",
+  "author": "Milo Hansen <github@milo.codes>",
+  "license": "ISC",
+  "type": "module",
+  "module": "./dist/JSOViewer.js",
+  "types": "./dist/JSOViewer.d.ts",
+  "keywords": [
+    "components",
+    "design",
+    "frontend",
+    "library",
+    "react",
+    "ui",
+    "mantine"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/JSOViewer.d.ts",
+      "import": "./dist/JSOViewer.js"
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css",
+    "./styles/*": "./styles/*",
+    "./Tooltip": {
+      "types": "./dist/accessories/Tooltip.d.ts",
+      "import": "./dist/accessories/Tooltip.js"
+    },
+    "./MouseTooltip": {
+      "types": "./dist/accessories/MouseTooltip.d.ts",
+      "import": "./dist/accessories/MouseTooltip.js"
+    },
+    "./TransitionPortal": {
+      "types": "./dist/accessories/TransitionPortal.d.ts",
+      "import": "./dist/accessories/TransitionPortal.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "repository": {
+    "url": "https://github.com/milohansen/JSOViewer.git",
+    "type": "git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "watch": "vite build --watch",
+    "test": "jest",
+    "tsc": "tsc"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "peerDependencies": {
+    "@mantine/core": "^8.x",
+    "@mantine/hooks": "^8.x",
+    "@tabler/icons-react": "^3.x",
+    "es-toolkit": "^1.x",
+    "react": "^18.x || ^19.x",
+    "react-dom": "^18.x || ^19.x"
+  },
+  "dependencies": {
+    "pluralize": "^8.0.0"
+  },
+  "devDependencies": {
+    "@mantine/core": "^8.3.1",
+    "@mantine/hooks": "^8.3.1",
+    "@tabler/icons-react": "^3.35.0",
+    "@types/eslint-scope": "^8.3.2",
+    "@types/pluralize": "^0.0.33",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "es-toolkit": "^1.39",
+    "eslint": "^9.35.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "postcss": "^8.5.4",
+    "postcss-nesting": "^13.0.1",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.9.2",
+    "typescript-plugin-css-modules": "^5.2.0",
+    "vite": "^7.1.2",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-node-polyfills": "^0.24.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

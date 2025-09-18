@@ -1,0 +1,64 @@
+.value {
+  --value-color: var(--mantine-color-text);
+  color: var(--value-color);
+
+  &.null {
+    --value-color: var(--null-color, var(--mantine-color-dimmed));
+  }
+  &.undefined {
+    --value-color: var(--undefined-color, var(--mantine-color-dimmed));
+  }
+  &.string {
+    --value-color: var(--string-color, var(--mantine-color-orange-text));
+    white-space: nowrap;
+  }
+  &.number {
+    --value-color: var(--number-color, var(--mantine-color-blue-text));
+  }
+  &.function {
+    --value-color: var(--function-color, var(--mantine-color-teal-text));
+    white-space: pre;
+    align-self: flex-start;
+
+    --indent: attr(data-indent type(<number>));
+    padding-left: calc(var(--indent) * 1ch);
+    /* This is valid css, ignore the error */
+    padding-left: if(not style(--indent: 0): calc(var(--indent) * 1ch - 1px));
+    border-left: if(not style(--indent: 0): 1px solid var(--mantine-color-teal-light));
+  }
+  &.symbol {
+    --value-color: var(--symbol-color, var(--mantine-color-cyan-text));
+  }
+  &.date {
+    --value-color: var(--date-color, var(--mantine-color-indigo-text));
+  }
+  &.boolean {
+    --value-color: var(--boolean-color, var(--mantine-color-grape-text));
+  }
+
+  &.object {
+    white-space: pre-wrap;
+  }
+
+  &.collection-brackets {
+    color: var(--bracket-color);
+  }
+}
+
+.label > .value {
+  &:not(:has(> .value)) {
+    &::after {
+      content: var(--after-content, " ");
+      color: var(--mantine-color-text);
+      white-space: pre;
+    }
+  }
+
+  & > .value:last-child {
+    &::after {
+      content: var(--after-content, " ");
+      color: var(--mantine-color-text);
+      white-space: pre;
+    }
+  }
+}
