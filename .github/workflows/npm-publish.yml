@@ -52,5 +52,16 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run build
+        run: yarn build
       - name: Publish package
-        run: npx jsr publish
+        run: yarn dlx jsr publish
