@@ -26,7 +26,8 @@ jobs:
         run: yarn install --immutable
       - name: Run build
         run: yarn build
-      - run: yarn npm publish
+      - name: Publish package
+      - run: yarn npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
