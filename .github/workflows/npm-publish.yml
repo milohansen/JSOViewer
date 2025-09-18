@@ -25,6 +25,10 @@ jobs:
         with:
           node-version: "22.x"
           cache: "yarn"
+      - name: Auth
+        run: |
+          echo "npmAlwaysAuth: true" > .yarnrc.yml
+          echo "npmAuthIdent: ${{secrets.npm_token}}" >> .yarnrc.yml
       - name: Install dependencies
         run: yarn install --immutable
       - name: Run build
