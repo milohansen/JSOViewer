@@ -7,39 +7,50 @@ on:
   release:
     types: [created]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.x"
-          cache: 'yarn'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Run build
-        run: yarn build
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Enable Corepack
+#         run: corepack enable
+#       - name: Use Node.js 20.x
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "22.x"
+#           cache: 'yarn'
+#       - name: Install dependencies
+#         run: yarn install --immutable
+#       - name: Run build
+#         run: yarn build
 
-  publish-npm:
-    needs: build
+#   publish-npm:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Enable Corepack
+#         run: corepack enable
+#       - name: Use Node.js 20.x
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "22.x"
+#           cache: 'yarn'
+#       - name: Install dependencies
+#         run: yarn install --immutable
+#       - name: Run build
+#         run: yarn build
+#       - run: yarn publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+jobs:
+  publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.x"
-          cache: 'yarn'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Run build
-        run: yarn build
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - name: Publish package
+        run: npx jsr publish

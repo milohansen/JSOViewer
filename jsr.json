@@ -1,0 +1,20 @@
+{
+  "name": "@m110/jso-viewer",
+  "version": "0.1.0",
+  "license": "ISC",
+  "exports": {
+    ".": "./src/JSOViewer.tsx",
+    "./Tooltip": "./src/accessories/Tooltip.tsx",
+    "./MouseTooltip": "./src/accessories/MouseTooltip.tsx",
+    "./CopyButton": "./src/accessories/CopyButton.tsx",
+    "./TransitionPortal": "./src/accessories/TransitionPortal.tsx"
+  },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "src/**/*.ts*",
+      "src/**/*.css"
+    ]
+  }
+}
