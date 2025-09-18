@@ -708,6 +708,7 @@ __metadata:
     "@types/react": "npm:^19.1.0"
     "@types/react-dom": "npm:^19.1.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    clsx: "npm:^2.1.1"
     es-toolkit: "npm:^1.39"
     eslint: "npm:^9.35.0"
     eslint-plugin-react: "npm:^7.33.2"
