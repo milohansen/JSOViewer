@@ -32,11 +32,11 @@ jobs:
 
       - name: Auth
         run: |
-          echo "npmAlwaysAuth: true" > .yarnrc.yml
-          echo "npmRegistryServer: \"https://registry.npmjs.org/\"" >> .yarnrc.yml
-          echo "npmAuthIdent: ${{secrets.npm_token}}" >> .yarnrc.yml
+          echo "registry=\"https://registry.npmjs.org/\"" > .npmrc
+          echo "always-auth=true" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.npm_token}}" >> .npmrc
       - name: Publish package
-        run: yarn npm publish --provenance
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
