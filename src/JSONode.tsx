@@ -122,9 +122,9 @@ export const JSONode = memo(function JSONodeInternal({
   const hasChunks = !!chunks;
 
   useEffect(() => {
-    // console.log("setChunks", node.nodeKey, chunks, node.type, isExpanded, nodeSize);
-    // if (chunks || node.type !== "collection" || (!isExpanded && nodeSize > 5)) {
-    if (!node || node.type !== "collection" || (!isExpanded && nodeSizing.size > 5)) {
+    // Guard: if value transitioned from object/array to primitive/undefined/null while old collection node still in state (startTransition race)
+    // we must avoid calling node.getChildren on a non-object value which would throw (Object.entries(undefined/null)).
+    if (!node || node.type !== "collection" || (!isExpanded && nodeSizing.size > 5) || typeof value !== "object" || value === null) {
       return;
     }
     if (hasChunks) {
@@ -132,9 +132,6 @@ export const JSONode = memo(function JSONodeInternal({
     } else {
       setLoadingChunks(true);
       startTransition(() => {
-        // console.log("setChunks", node.nodeKey, nodeSize, isExpanded, chunks);
-        // const chunkSize = typeof node.chunkSize === "function" ? node.chunkSize(node.size, node.kind, node) : node.chunkSize;
-        // setChunks(makeNodeChunks(node.getChildren(), chunkSize, node, { sort: sortKeys, nest: true }));
         dispatch({ node, sortKeys, value });
         setLoadingChunks(false);
       });
@@ -505,10 +502,22 @@ function chunksReducer(state: ChunksState | undefined, action: ChunksAction): Ch
   }
 
   const node = action.node;
-  // const label = `makeNodeChunks ${node.nodeKey}`;
-  // console.time(label);
-  const chunks = makeNodeChunks(node.getChildren(action.value), node.sizing.chunkSize, node, { sort: action.sortKeys, nest: true });
-  // console.timeEnd(label);
+  // Regression note (2025-09): Guard against value transitioning from an object to undefined/null between
+  // the node creation and chunk calculation (e.g., reactive context updates). Previously this caused
+  // "Cannot convert undefined or null to object" when node.getChildren(Object.entries/keys) was invoked.
+  let children: ReturnType<typeof node.getChildren> = [];
+  try {
+    // Only attempt to read children if value still resembles an object/array
+    if (typeof action.value === "object" && action.value !== null) {
+      children = node.getChildren(action.value);
+    } else {
+      children = [];
+    }
+  } catch {
+    // Fallback to empty children on error (e.g., reactive value changed mid-render)
+    children = [];
+  }
+  const chunks = makeNodeChunks(children, node.sizing.chunkSize, node, { sort: action.sortKeys, nest: true });
   return {
     sourceValue: action.value,
     chunks,
