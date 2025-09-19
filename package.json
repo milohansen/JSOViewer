@@ -2,12 +2,6 @@
   "name": "@milo.codes/jso-viewer",
   "version": "0.1.0-alpha.1",
   "description": "React library for viewing JSON data with advanced features.",
-  "author": "Milo Hansen <github@milo.codes>",
-  "license": "ISC",
-  "type": "module",
-  "module": "./dist/JSOViewer.mjs",
-  "main": "./dist/JSOViewer.cjs",
-  "types": "./dist/JSOViewer.d.ts",
   "keywords": [
     "components",
     "design",
@@ -17,8 +11,19 @@
     "ui",
     "mantine"
   ],
+  "author": "Milo Hansen <github@milo.codes>",
+  "license": "ISC",
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./JSOViewer": {
       "types": "./dist/JSOViewer.d.ts",
       "import": "./dist/JSOViewer.mjs",
       "require": "./dist/JSOViewer.cjs"
@@ -79,7 +84,6 @@
     "@mantine/hooks": "^8.3.1",
     "@tabler/icons-react": "^3.35.0",
     "@types/eslint-scope": "^8.3.2",
-    "@types/pluralize": "^0.0.33",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.2.1",
@@ -100,8 +104,6 @@
     "typescript": "^5.9.2",
     "typescript-plugin-css-modules": "^5.2.0",
     "vite": "^7.1.2",
-    "vite-plugin-html": "^3.2.2",
-    "vite-plugin-node-polyfills": "^0.24.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "packageManager": "yarn@4.10.2"
