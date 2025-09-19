@@ -1,6 +1,6 @@
 {
   "name": "@milo.codes/jso-viewer",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "React library for viewing JSON data with advanced features.",
   "keywords": [
     "components",
